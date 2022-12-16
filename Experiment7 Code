@@ -1,0 +1,22 @@
+int buttonPin = 12; // the number of the push button pin   
+int buzzerPin = 9; // the number of the buzzer pin   
+   
+void setup() {   
+ pinMode(buttonPin, INPUT); // Set push button pin into input mode   
+ pinMode(buzzerPin, OUTPUT); // Set Buzzer pin into output mode   
+}  
+   
+void loop() { // the loop is roughly 5 seconds long  
+  if (digitalRead(buttonPin)==LOW){  // if the button is pressed 
+    delay(30);  // wait for 30 
+    while (digitalRead(buttonPin)==HIGH)  // once the button has stopped being pressed 
+    {     
+      for (int freq=440;freq<800;freq++) // start at frequency of 440, continually increasing until reaching 800. Or do the same if 440 is reached 
+        tone(buzzerPin, freq, 100); // set the length of time for the above frequency to 100 
+      for (int freq=800;freq>440;freq--) // upon reaching a frequency of 800, continually decrease to 440 
+        tone(buzzerPin, freq, 100);  
+    }    
+    digitalWrite(buzzerPin, LOW);  // else switch buzzer pin to off 
+    delay(30);   
+  }   
+} 
